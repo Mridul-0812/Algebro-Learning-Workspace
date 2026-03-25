@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Algebra Learning Workspace</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <div class="glass-card">
+            <h1>Algebro Learning Workspace - Intricate</h1>
+            <div class="nav-bar">
+                <button class="nav-btn" onclick="showLevel('home')">Home 🏠</button>
+                <button class="nav-btn" onclick="showLevel('basics')">Introduction</button>
+                <button class="nav-btn" onclick="showLevel('moderate')">Deep Dive 🌊</button>
+                <button class="nav-btn" onclick="showLevel('intricate')">The Intricacies 😵‍💫</button>
+                <button class="nav-btn active" onclick="showLevel('practice')">Practice Questions 😵</button>
+            </div>
+
+            <hr style="border: 0; height: 1px; background: grey; margin: 30px 0;">
+
+            <p>The Alphabet Rule: In Algebra, '𝑥' is the superstar, but any letter from a to z can be a mystery number, called a variable! Whether it's 5a, 2𝑦, or 10z, they all work exactly like our Magic Boxes.</p>
+            
+            <!--CODE for EXAMPLE 1-->
+            <h2>The Trickiest Examples</h2>
+            <h3>Example 1 - Where 𝑥 is on Both Sides</h3>
+            <p>Equation to solve: 3𝑥 + 5 = 𝑥 + 11</p>
+            <p>Rule 1: Move the <b>smaller variable</b> to meet the bigger one!</p>
+            <p>Rule 2: Always subtract terms with <b>variables</b> with each other and <b>number terms (known as constants)</b> with each others.</p>
+        
+            <div class="rect"> 
+                <div class="side" id="lhs-portal" ondragover="event.preventDefault()" ondrop="mergeTerms(event)">
+                    <div class="term-capsule variable" id="big-x">3𝑥</div>
+                    <div class="term-capsule constant" draggable="true" ondragstart="drag(event)" id="const-left">+5</div>
+                </div>
+            
+                <div class="equals-portal">=</div>
+            
+                <div class="side" id="rhs-portal" ondragover="event.preventDefault()" ondrop="moveNumber(event)">
+                    <div class="term-capsule variable smaller" draggable="true" ondragstart="drag(event)" id="small-x">𝑥</div>
+                    <div class="term-capsule constant" id="const-right">+11</div>
+                </div>
+            </div> <br>
+            <div id="instruction-text">Drag the <b>𝑥</b> from the right to the left side!</div>
+            <br>
+            <button onclick="location.reload()">Reset</button>
+        
+            <div class="answer-box"> <p>Enter 𝑥-value below:</p>
+                <input type="number" id="x-guess" placeholder="𝑥-value?">
+                <button onclick="checkxValue()">Check Answer</button>
+            </div> 
+            <br><hr> 
+
+            <!--CODE for EXAMPLE 2-->
+            <h3>Example 2 - Where 𝑥 is on Both Sides</h3>
+            <p>Equation to solve: 5𝑥 + 12 = 2𝑥 + 27</p>
+                    
+            <div class="rect"> 
+                <div class="side" id="lhs-portal2" ondragover="event.preventDefault()" ondrop="mergeTerms2(event)">
+                    <div class="term-capsule variable" id="big-x2">5𝑥</div>
+                    <div class="term-capsule constant" draggable="true" ondragstart="drag(event)" id="const-left2">+12</div>
+                </div>
+            
+                <div class="equals-portal">=</div>
+            
+                <div class="side" id="rhs-portal2" ondragover="event.preventDefault()" ondrop="moveNumber2(event)">
+                    <div class="term-capsule variable smaller" draggable="true" ondragstart="drag(event)" id="small-x2">2𝑥</div>
+                    <div class="term-capsule constant" id="const-right2">+27</div>
+                </div>
+            </div> <br>
+            <div id="instruction-text2">Drag the <b>𝑥</b> from the right to the left side!</div>
+            <br>
+            <button onclick="location.reload()">Reset</button>
+        
+            <div class="answer-box"> <p>Enter 𝑥-value below:</p>
+                <input type="number" id="x-guess2" placeholder="𝑥-value?">
+                <button onclick="checkxValue2()">Check Answer</button>
+            </div> 
+            <br><hr> 
+
+            <!--CODE for EXAMPLE 3-->
+            <h3>Example 3 - The Ultimate Challenge (Combining Everything)</h3>
+            <p>Equation: <span class="math-text">3(5 - 2𝑥) = 4(3𝑥 + 13) - 1</span></p>
+
+            <div id="step1" style="display:none;">
+                <p><b>Step 1: Expand the Brackets (How to Expand)</b><br><br>
+                1. Multiply the outside number by everything inside<br>
+                2. The 3 on LHS gets multiplied by 5 and -2𝑥
+                <br>3. Same with RHS: 4 gets multiplied by 3𝑥 and 13
+                <br><br>
+                <b>Equation:</b> 15 - 6𝑥 = 12𝑥 + 52 - 1</p>
+            </div>
+        
+            <div id="step2" style="display:none;">
+                <p><b>Step 2: Clean Up</b><br><br>
+                Simplify that 52 - 1 on the right:<br><br>
+                <b>Equation:</b> 15 - 6𝑥 = 12𝑥 + 51</p>
+            </div>
+        
+            <div id="step3" style="display:none;">
+                <p><b>Step 3: Move the 𝑥 terms</b><br><br>
+                Add 6𝑥 to both sides to get rid of the negative:<br><br>
+                <b>Equation:</b> 15 = 18𝑥 + 51</p>
+            </div>
+        
+            <div id="step4" style="display:none;">
+                <p><b>Step 4: Solve for 𝑥</b><br><br>
+                Subtract 51 from both sides:<br><br>
+                <b>Equation:</b> -36 = 18𝑥<br></p>
+
+                <div class="answer-box"> 
+                    <p>Enter 𝑥-value below:</p>
+                    <input type="number" id="x-guess4" placeholder="𝑥-value">
+                    <button onclick="checkxValue4()">Check Answer</button>
+                </div>
+            </div>
+                
+            
+            <br><br>
+            <button onclick="revealNextStep()">Show Next Step</button>
+            <button onclick="location.reload()">Reset</button>
+
+            <br><br><hr>
+
+            <!--CODE for EXAMPLE 4-->
+            <h3>Example 4 - The Ultimate Challenge - Part 2</h3>
+            <p>Equation: <span class="math-text">5(𝑥 + 2) - 3(𝑥 - 4) = 30</span></p>
+
+            <div id="step1-a" style="display:none;">
+                <p><b>Step 1: Expand the Brackets (How to Expand)</b><br><br>
+                1. Multiply the outside number by everything inside<br>
+                2. The 5 on LHS gets multiplied by 2 and 𝑥
+                <br>3. Same with -3: It gets multiplied by 𝑥 and -4
+                <br> Remember to be carefulo about the negative sign before the 3
+                <br><br>
+                <b>Equation:</b> 5𝑥 + 10 - 3𝑥 + 12 = 30</p>
+            </div>
+        
+            <div id="step2-a" style="display:none;">
+                <p><b>Step 2: Clean Up</b><br><br>
+                Simplify that 5𝑥 - 3𝑥 and 10 + 12 on the left:<br><br>
+                <b>Equation:</b> 2𝑥 + 22 = 30</p>
+            </div>
+        
+            <div id="step3-a" style="display:none;">
+                <p><b>Step 3: Move the constant term</b><br><br>
+                Move 22 to the RHS so it turns into -22<br><br>
+                <b>Equation:</b> 2𝑥 = 30 - 22</p>
+            </div>
+        
+            <div id="step4-a" style="display:none;">
+                <p><b>Step 4: implify</b><br><br>
+                Collect like terms<br><br>
+                <b>Equation:</b> 2𝑥 = 8<br></p>
+            </div>
+
+            <div id="step5-a" style="display:none;">
+                <p><b>Step 5: Solve for 𝑥 </b><br><br>
+                Divide through by 2 (to both sides)<br><br>
+                <b>Equation:</b> 2𝑥 = 8<br></p>
+
+                <div class="answer-box"> 
+                    <p>Enter 𝑥-value below:</p>
+                    <input type="number" id="x-guess5" placeholder="𝑥-value">
+                    <button onclick="checkxValue5()">Check Answer</button>
+                </div>
+            </div>
+                
+            
+            <br><br>
+            <button onclick="revealNextStepA()">Show Next Step</button>
+            <button onclick="location.reload()">Reset</button>
+
+        <!--Linking the JavaScript file to the HTML file-->
+        </div> <script src="math.js"></script>
+    </body>
+</html>

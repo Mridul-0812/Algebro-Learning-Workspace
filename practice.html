@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Algebra Practice | Algebro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="glass-card main-practice-container">
+        <div class="header-section">
+            <h1 class="gradient-text">Mastery Practice</h1>
+        </div>
+
+        <div class="nav-bar">
+            <button class="nav-btn" onclick="showLevel('home')">Home 🏠</button>
+            <button class="nav-btn" onclick="showLevel('basics')">Introduction 😊</button>
+            <button class="nav-btn" onclick="showLevel('moderate')">Deep Dive 🌊</button>
+            <button class="nav-btn" onclick="showLevel('intricate')">Intricacies 😵‍💫</button>
+            <button class="nav-btn active" onclick="showLevel('practice')">Practice 😵</button>
+        </div>
+
+        <hr class="styled-hr">
+
+        <p class="subtitle">Prove your skills by solving these questions, ranging from simple to hard.</p>
+
+        <section class="question-card easy">
+            <div class="q-header">
+                <span class="difficulty-tag">Level 1: Easy</span>
+                <h3>Solving Basics</h3>
+            </div>
+            <p class="equation-text">14 - 3(𝑥 + 2) = 2</p>
+            <div class="interaction-area">
+                <input type="number" id="x-1" placeholder="𝑥-value">
+                <button class="check-btn" onclick="checkPractice()">Check Answer</button>
+            </div>
+        </section>
+
+        <section class="question-card medium">
+            <div class="q-header">
+                <span class="difficulty-tag">Level 2: Medium</span>
+                <h3>The Number Thinker</h3>
+            </div>
+            <p class="problem-description">Jonah is thinking of a number. If he <b>times it by 5</b> and <b>subtracts 7</b>, the result is the same as if he <b>tripled</b> it and <b>added 3</b>.</p>
+            <div class="interaction-area">
+                <input type="number" id="x-2" placeholder="Value">
+                <button class="check-btn" onclick="checkPractice2()">Check Answer</button>
+            </div>
+        </section>
+
+        <section class="question-card hard">
+            <div class="q-header">
+                <span class="difficulty-tag">Level 3: Hard</span>
+                <h3>Nested Brackets</h3>
+            </div>
+            <p class="equation-text mini">4[2(𝑦 - 1) + 3] - 14 = 2(𝑦 + 7)</p>
+            <div class="hint-box">
+                <strong>NOTE:</strong> You always start with round brackets ( ) for the first, inner grouping, then use square brackets [ ] if you need a second set outside of them (as in the equation above). Essentially, the innermost brackets or the first set of brackets are always round.
+            </div>
+
+            <div class="hint-box">
+            <strong>💡 PRO TIP:</strong> This is a challenge but it is exactly what you have learnt before. Just expand the brackets twice (first the round ones, then the square ones). Work from the inside out before you multiply everything by 4!
+            </div>
+
+            <div class="interaction-area">
+                <input type="number" id="x-3" placeholder="𝑦-value">
+                <button class="check-btn" onclick="checkPractice3()">Check Answer</button>
+            </div>
+        </section>
+
+        <section class="question-card hard">
+            <div class="q-header">
+                <span class="difficulty-tag">Level 4: Hard</span>
+                <h3>The Sign Tricker</h3>
+            </div>
+            <p class="equation-text mini">3(2𝑥 - 5) - (𝑥 - 4) = 4(𝑥 + 1) + 1</p>
+            <div class="interaction-area">
+                <input type="number" id="x-4" placeholder="𝑥-value">
+                <button class="check-btn" onclick="checkPractice4()">Check Answer</button>
+            </div>
+        </section>
+
+        <section class="question-card boss">
+            <div class="q-header">
+                <span class="difficulty-tag">Level 5: Master</span>
+                <h3>The Garden Paradox</h3>
+            </div>
+            <p class="problem-description">A rectangular garden is <b>3m longer than it is wide</b>. If I <b>double the breadth</b> and <b>triple the length</b>, the new perimeter is <b>88m</b>.</p>
+            
+            <div class="step-box">
+                <p><strong>A)</strong> Write the length expression using breadth (b):</p>
+                <div class="interaction-area">
+                    <input type="text" id="x-5" placeholder="e.g., b+1">
+                    <button class="check-btn small" onclick="checkPractice5()">Verify A</button>
+                </div>
+            </div>
+
+            <div class="step-box" id="part-b">
+                <p><strong>B)</strong> New dimensions (Double Width × Triple Length):</p>
+                <div class="multi-input">
+                    <input type="text" id="x-6" placeholder="Length">
+                    <span>×</span>
+                    <input type="text" id="x-7" placeholder="Breadth">
+                    <button class="check-btn small" onclick="checkPractice6()">Verify B</button>
+                </div>
+            </div>
+
+            <div class="step-box" id="part-c">
+                <p><strong>C)</strong> Form the full perimeter equation (= 88):</p>
+                <div class="interaction-area">
+                    <input type="text" id="x-8" placeholder="Equation">
+                    <button class="check-btn small" onclick="checkPractice7()">Verify C</button>
+                </div>
+            </div>
+
+            <div class="step-box" id="part-d">
+                <p><strong>D)</strong> Solve for <b>b</b>:</p>
+                <div class="interaction-area">
+                    <input type="number" id="x-9" placeholder="b-value">
+                    <button class="check-btn small" onclick="checkPractice8()">Verify D</button>
+                </div>
+            </div>
+
+            <div class="step-box" id="part-e">
+                <p><strong>E)</strong> Original Dimensions (Length × Breadth):</p>
+                <div class="multi-input">
+                    <input type="text" id="x-10" placeholder="Length">
+                    <span>×</span>
+                    <input type="text" id="x-11" placeholder="Breadth">
+                    <button class="check-btn small" onclick="checkPractice9()">Finish Challenge</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!--Linking the JavaScript file to the HTML file-->
+    <script src="math.js"></script>
+</body>
+</html>

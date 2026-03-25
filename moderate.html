@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Algebra Learning Workspace</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+
+        <div class="glass-card">
+            <h1>Algebro Learning Workspace - Moderate</h1>
+            <div class="nav-bar">
+                <button class="nav-btn" onclick="showLevel('home')">Home 🏠</button>
+                <button class="nav-btn" onclick="showLevel('basics')">Introduction 😊</button>
+                <button class="nav-btn" onclick="showLevel('moderate')">Deep Dive 🌊</button>
+                <button class="nav-btn" onclick="showLevel('intricate')">The Intricacies 😵‍💫</button>
+                <button class="nav-btn active" onclick="showLevel('practice')">Practice Questions 😵</button>
+            </div>
+
+            <hr style="border: 0; height: 1px; background: grey; margin: 30px 0;">
+
+            <!--CODE for QUESTION 1 EXAMPLE-->
+            <h2>Trickier Examples</h2>
+            <h3><h2>Example 1:</h2></h3>
+            <p>Solve for 𝑥: <b>2𝑥 + 5 = 15</b></p>
+            <p>NOTE: 2𝑥 is just a math shortcut for two boxes of 𝑥. It's the same as saying 𝑥 + 𝑥 or 2 times 𝑥.</p>
+            
+            <div class="equation-line">
+                <span id="coefficient" onclick="divide()">2</span><span id="variable">𝑥</span> 
+                <span id="extra" onclick="subtract()">+ 5</span> 
+                = 
+                <span id="total">15</span>
+            </div>
+        
+            <div id="feedback" style="margin-top: 20px; font-weight: bold; color: blue;">
+                Click the "+ 5" to move it to the other side (in other words, subtract 5 from both sides)!
+            </div>
+
+            <br>
+
+            <h3>What's happening:</h3>
+        
+            <div id="visual-step-1" class="visual-explanation">
+                <p>You have <b>two '𝑥' boxes</b> and <b>5 individual blocks</b>, balancing <b>15 blocks</b>.</p>
+                <div class="visual-line">
+                    <div class="visual-box">𝑥</div><div class="visual-box">𝑥</div> 
+                    <div class="visual-block"></div><div class="visual-block"></div><div class="visual-block"></div><div class="visual-block"></div><div class="visual-block"></div>
+                    =
+                    <div class="visual-block long"></div><div class="visual-block long"></div><div class="visual-block long"></div> </div>
+                <p style="font-style: italic; font-size: 0.9em;">(Each long block represents 5 for simplicity (5 + 5 + 5 = 15))</p>
+            </div>
+
+            <div id="visual-step-2" class="visual-explanation" style="display: none;">
+                <p>You remove <b>5 blocks</b> from both sides, leaving <b>two '𝑥' boxes</b> balancing <b>10 blocks</b>.</p>
+                <div class="visual-line">
+                    <div class="visual-box">𝑥</div><div class="visual-box">𝑥</div> 
+                    =
+                    <div class="visual-block long"></div><div class="visual-block long"></div> </div>
+                <p style="font-style: italic; font-size: 0.9em;">(Each long block still represents 5)</p>
+            </div>
+
+            <div id="visual-final" class="visual-explanation" style="display: none;">
+                <p>You split the <b>10 blocks</b> into <b>two equal groups</b> for each '𝑥' box, so each '𝑥' is <b>5 blocks</b>.</p>
+                <div class="visual-line">
+                    <div class="visual-box-final">𝑥 = 5</div>
+                    <div class="visual-box-final">𝑥 = 5</div>
+                </div>
+            </div>
+            <button onclick="location.reload()">Reset Challenge</button>
+            <br><br>
+            <hr>
+
+            <!--CODE for QUESTION 2 EXAMPLE-->
+            <h2>Example 2:</h2>
+            <p>Solve for 𝑥: <b>6𝑥 + 8 = 32</b></p>
+            
+            <div class="equation-line">
+                <span id="coefficient2" onclick="divide2()">6</span><span id="variable2">𝑥</span> 
+                <span id="extra2" onclick="subtract2()">+ 8</span> 
+                = 
+                <span id="total2">32</span>
+            </div>
+        
+            <div id="feedback2" style="margin-top: 20px; font-weight: bold; color: blue;">
+                Click the "+ 8" to move it to the other side!
+            </div>
+
+            <br>
+
+            <h3>What's happening:</h3>
+        
+            <div id="visual-step-1-2" class="visual-explanation">
+                <p>You have <b>six '𝑥' boxes</b> and <b>8 individual blocks</b>, balancing <b>32 blocks</b>.</p>
+                <div class="visual-line">
+                    <div class="visual-box2">𝑥</div><div class="visual-box2">𝑥</div><div class="visual-box2">𝑥</div><div class="visual-box2">𝑥</div><div class="visual-box2">𝑥</div><div class="visual-box2">𝑥</div>
+                    <div class="visual-block2"></div><div class="visual-block2"></div><div class="visual-block2"></div><div class="visual-block2"></div><div class="visual-block2"></div><div class="visual-block2"></div><div class="visual-block2"></div><div class="visual-block2"></div>
+                    =
+                    <div class="visual-block long2"></div><div class="visual-block long2"></div><div class="visual-block long2"></div><div class="visual-block long2"></div></div>
+                <p style="font-style: italic; font-size: 0.9em;">(Each long block represents 8 for simplicity (8 + 8 + 8 + 8 = 32))</p>
+            </div>
+
+            <div id="visual-step-2-2" class="visual-explanation" style="display: none;">
+                <p>You remove <b>8 blocks</b> from both sides, leaving <b>six '𝑥' boxes</b> balancing <b>24 blocks</b>.</p>
+                <div class="visual-line">
+                    <div class="visual-box">𝑥</div><div class="visual-box">𝑥</div><div class="visual-box">𝑥</div><div class="visual-box">𝑥</div><div class="visual-box">𝑥</div><div class="visual-box">𝑥</div>
+                    =
+                    <div class="visual-block long2"></div><div class="visual-block long2"></div><div class="visual-block long2"></div><div class="visual-block long2"></div> </div>
+                <p style="font-style: italic; font-size: 0.9em;">(Each long block now represents 6)</p>
+            </div>
+
+            <div id="visual-final2" class="visual-explanation" style="display: none;">
+                <p>You split the <b>24 blocks</b> into <b>six equal groups</b> for each '𝑥' box, so each '𝑥' is <b>4 blocks</b>.</p>
+                <div class="visual-line">
+                    <div class="visual-box-final">𝑥 = 4</div>
+                    <div class="visual-box-final">𝑥 = 4</div>
+                    <div class="visual-box-final">𝑥 = 4</div>
+                    <div class="visual-box-final">𝑥 = 4</div>
+                    <div class="visual-box-final">𝑥 = 4</div>
+                    <div class="visual-box-final">𝑥 = 4</div>
+                </div>
+            </div>
+            <button onclick="location.reload()">Reset Challenge</button>
+
+            <br>
+            <br>
+            <hr>
+
+            <!--CODE for EXAMPLE 3-->
+            <h3>Example 3 - Negative Coefficients (Using Drag and Drop)</h3>
+            <p>Equation to solve: 7 - 𝑥 = 5</p>
+            <p><i>Hint: Drag the negative 𝑥 to the other side to make it positive!</i></p>
+            <p><i>NOTE: Whenever a term (variable or number) is moved to the other side, its sign changes (i.e. from + to - or vice versa).</i></p>
+
+            <div class="rect">
+                <div class="side" id="lhs-portal3">
+                    <div class="term-capsule constant">7</div>
+                    <div class="term-capsule variable" draggable="true" ondragstart="drag(event)" id="neg-x">-𝑥</div>
+                </div>
+
+                <div class="equals-portal">=</div>
+
+                <div class="side" id="rhs-portal3" ondragover="event.preventDefault()" ondrop="moveNegativeX(event)">
+                    <div class="term-capsule constant" id="const-right3">5</div>
+                </div>
+            </div>
+
+            <br>
+            <div id="instruction-text3">Drag the <b>-𝑥</b> to the right side to balance the signs!</div>
+            <br>
+            <button onclick="location.reload()">Reset</button>
+
+            <div class="answer-box"> 
+                <p>Enter 𝑥-value below:</p>
+                <input type="number" id="x-guess3" placeholder="𝑥-value">
+                <button onclick="checkxValue3()">Check Answer</button>
+            </div>
+
+            <br><hr><br>
+
+                <h3>📺 Visual Explanation of Solving Equations</h3>
+                <p>Watch a step-by-step breakdown of how to solve simple, linear equations (from the famous Organic Chemistry Tutor - Julio Gonzales).</p>
+                    <iframe width="560" height="315" 
+                            src="https://www.youtube.com/embed/7DPWeBszNSM" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+
+            <br><br><hr><br>
+
+            <!--CODE for QUESTION 4-->
+            <h2>Example 4: Forming Equations</h2>
+            <p>Sometimes, the equation isn't directly given to you. You have to build it based on the details provided!</p>
+            
+            <div class="word-problem">
+                "Jamie is <b>4 years older</b> than <b>twice</b> his brother's (Jamal) age. 
+                If Jamie is <b>14</b>, how old is Jamal?"
+            </div>
+
+            <div class="answer-box">
+                <p>Enter Jamal's age:</p>
+                <input type="number" id="jamal-guess" placeholder="Age?">
+                <button onclick="checkJamalAge()">Check Answer</button>
+            </div>
+
+            <br>
+
+            <button onclick="revealStep('hint1')">Hint</button>
+            <p id="hint1" style="display:none;">1. Let <b>𝑥</b> be Jamal's age.</p>
+
+            <button onclick="revealStep('hint3')">Explanation</button>
+            <p id="hint3" style="display:none;">1. You start off by identifying that Jamie is double Jamal's age (2𝑥)
+                <br><br>2. He is also 4 years older than double the age (Thus 2𝑥 + 4, and equate it to Jamal's age (14))
+            </p>
+
+            <button onclick="revealStep('hint2')">Reveal Equation</button>
+            <p id="hint2" style="display:none; font-size: 1.5em;">2𝑥 + 4 =14</p>
+
+            <br><br>
+            <hr>
+
+            <!--CODE for QUESTION 5-->
+            <h2>Example 5: Forming Equations v2</h2>
+            <br>
+            <div class="word-problem">
+                "You buy <b>3 identical toy boxes</b> and a <b>$2 sticker</b>. The total cost is <b>$20</b>.
+                How much does each toy box cost?"
+            </div>
+
+            <div class="answer-box">
+                <p>Enter box's cost below:</p>
+                <input type="number" id="box-guess" placeholder="Cost?">
+                <button onclick="checkBoxCost()">Check Answer</button>
+            </div>
+
+            <br>
+
+            <button onclick="revealStep2('hint4')">Hint</button>
+            <p id="hint4" style="display:none;">1. Let <b>𝑥</b> be cost of each toy box.</p>
+
+            <button onclick="revealStep('hint6')">Explanation</button>
+            <p id="hint6" style="display:none;">1. You start off by identifying that three toy boxes were brought with cost $𝑥 (thus total cost is 3𝑥).
+                <br><br>2. A $2  sticker was also brought, so you add that too (3𝑥 + 2) and equate it to total cost ($20).
+            </p>
+
+            <button onclick="revealStep2('hint5')">Reveal Equation</button>
+            <p id="hint5" style="display:none; font-size: 1.5em;">3𝑥 + 2 = 20</p>
+            
+            <br><br><hr>
+
+            <h3>📺 Visual Explanation</h3>
+                <p>Watch a step-by-step breakdown of how to form equations (from the famous Organic Chemistry Tutor - Julio Gonzales).</p>
+                    <iframe width="560" height="315" 
+                            src="https://www.youtube.com/embed/QEnFIgN8UBw" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+
+        </div>
+
+        <!--Linking the JavaScript file to the HTML file-->
+        <script src="math.js"></script>
+    </body>
+</html>

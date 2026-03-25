@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Algebra Learning Workspace</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+
+        <!--My overall rectangle where everything goes-->
+        <div class="glass-card">
+            <h1>Algebro Learning Workspace - Basic</h1>
+            <div class="nav-bar">
+                <button class="nav-btn" onclick="showLevel('home')">Home 🏠</button>
+                <button class="nav-btn" onclick="showLevel('basic')">Introduction 😊</button>
+                <button class="nav-btn" onclick="showLevel('moderate')">Deep Dive 🌊</button>
+                <button class="nav-btn" onclick="showLevel('intricate')">The Intricacies 😵‍💫</button>
+                <button class="nav-btn active" onclick="showLevel('practice')">Practice Questions 😵</button>
+            </div>
+
+            <hr style="border: 0; height: 1px; background: grey; margin: 30px 0;">
+
+            <p>Welcome to the introduction page about solving equations! Check out the examples below!</p>
+            
+            <!--QUESTION 1 CODE-->
+            <div class="app-container"> <!--START-->
+                <h2>Example 1: Balance the Seesaw</h2>
+                <p>LHS has <b>3 blocks</b>. Drag the correct number of blocks to the RHS to balance!</p>
+
+                <div class="equation-container1">
+                    <h3 id="equation1">Equation: 3 = <span id="x-value1">𝑥</span></h3>
+                    <p id="status1" style="color: red; font-weight: bold;">(Not Balanced)</p>
+                </div>
+
+                <div class="seesaw-area">
+                    <div class="side">
+                        <span>LHS</span>
+                        <div class="block"></div><div class="block"></div><div class="block"></div>
+                    </div>
+            
+                    <div class="pivot">▲</div>
+            
+                    <div class="side" id="rhs" ondragover="event.preventDefault()" ondrop="dropBlock(event)">
+                        <span>RHS</span>
+                    </div>
+                </div>
+            
+                <div class="blocks">
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="b1"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="b2"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="b3"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="b4"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="b5"></div>
+                </div>
+                <br>
+            
+                <button class="btn-submit" onclick="checkAnswer()">Check Answer</button>
+                <button class="btn-submit" onclick="resetBlocks()">Reset</button>
+            </div> <!--END-->
+
+            <p>Basic steps:<br>
+                <br>1) Because LHS (left-hand side) has three (3) blocks, let's assume RHS (right-hand side) has 𝑥 blocks.
+                <br>2) Thus, by equating LHS = RHS, we attain 𝑥 = 3. 
+                <br>3) Hence, RHS must also have three (3) blocks.
+                <br>4) This is how mathematical equations must be created.
+            </p>
+            <hr>
+
+            <!--QUESTION 2 CODE-->
+            <div class="app-container"> <!--START-->
+                <h2>Example 2: Balance the Seesaw</h2>
+                <p>LHS has <b>5 blocks</b>. Drag the correct number of blocks to the RHS to balance!</p>
+
+                <div class="equation-container">
+                    <h3 id="equation2">Equation: 5 = <span id="x-value2">𝑥</span> + 1</h3>
+                    <p id="status2" style="color: red; font-weight: bold;">(Not Balanced)</p>
+                </div>
+            
+                <div class="seesaw-area">
+                    <div class="side">
+                        <span>LHS</span>
+                        <div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div>
+                    </div>
+            
+                    <div class="pivot">▲</div>
+            
+                    <div class="side" id="rhs2" ondragover="event.preventDefault()" ondrop="dropBlock2(event)">
+                        <span>RHS</span>
+                        <div class="block permanent" draggable="true" ondragstart="dragBlock(event)" id="ab-fixed"></div>
+                    </div>
+                </div>
+
+                <!--Draggable blocks-->
+                <div class="blocks">
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="ab1"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="ab2"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="ab3"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="ab4"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="ab5"></div>
+                    <div class="block" draggable="true" ondragstart="dragBlock(event)" id="ab6"></div>
+                </div>
+                <br>
+            
+                <button class="btn-submit" onclick="checkAnswer2()">Check Answer</button>
+                <button class="btn-submit" onclick="resetBlocks2()">Reset</button>
+
+            </div> <!--END-->
+
+            <!--Basic STEPS to teach how the equation is formed-->
+            <p>Steps:<br>
+                <br>1) In this example, LHS has five (5) blocks and the RHS already has one (1) block.
+                <br>2) We need to add 𝑥 blocks to the RHS to balance both sides.
+                <br>3) According to this idea, to form LHS = RHS, we need to form the equation 5 = 𝑥 + 1.
+                <br>4) To solve such an equation, the idea is to make 𝑥 the subject of the equation (in other words, solve for 𝑥 by removing the +1 on the RHS).
+                <br>5) We can minus 1 from the RHS. However, whatever is done to the RHS should be done to the LHS as both sides must be balanced.
+                <br>6) Thus, we attain 5 - 1 = 𝑥 + 1 - 1. It equals 4 = 𝑥 OR 𝑥 = 4.
+                <br>7) Hence, we need to add four (4) blocks.
+            </p>
+
+        </div>
+
+        <!--Linking the JavaScript file to the HTML file-->
+        <script src="math.js"></script>
+    </body>
+</html>
