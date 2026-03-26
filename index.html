@@ -8,6 +8,29 @@
 
     <!--Main section of glass card where the home page resides-->
     <div class="glass-card main-section">
+
+        <div class="login-screen" id="login-gate">
+            <div class="login-card">
+              <h2>Algebra Workspace</h2>
+              <p>Please enter the universal credentials to enter.</p>
+              
+              <div class="input-group">
+                <input type="text" id="username" placeholder="Username" required>
+              </div>
+              
+              <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+              </div>
+              
+              <button class="login-btn" onclick="checkLogin()">Enter Workspace</button>
+              <p id="message" class="error-text"></p>
+            </div>
+          </div>
+          
+          <div id="main-app" style="display:none;">
+            <h1>Welcome to the App</h1>
+          </div>
+
         <div class="hero-section">
             <h1 class="gradient-text">Master the Mystery of Math</h1>
             <p class="hero-subtitle">Ever felt like equations were a secret code you couldn't crack? 🕵️‍♂️</p>

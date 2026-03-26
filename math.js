@@ -701,3 +701,23 @@ function checkPractice9() {
         alert("Not quite.\nHint: You found b=7 (Width), now just add 3 to get the original Length!\nAlso, did you forget the units (metres)?");
     }
 }
+
+function checkLogin() {
+    // Your Universal Credentials
+    const uUser = "Admin";
+    const uPass = "Algebra2026";
+  
+    const userIn = document.getElementById("username").value;
+    const passIn = document.getElementById("password").value;
+    const errorMsg = document.getElementById("message");
+  
+    if (userIn === uUser && passIn === uPass) {
+      // Hide login and show app
+      document.getElementById("login-gate").style.display = "none";
+      document.getElementById("main-app").style.display = "block";
+    } else {
+      errorMsg.innerHTML = "Access Denied. Incorrect Credentials.";
+      // Simple shake effect (Optional)
+      document.querySelector('.login-card').style.animation = "shake 0.2s ease-in-out 0s 2";
+    }
+  }
