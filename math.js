@@ -717,8 +717,14 @@ function login() {
         document.getElementById("login-screen").style.display = "none";
         // Show the actual website
         document.getElementById("main-content").style.display = "block";
-    } else {
+    } else if (userField != correctUser && passField === correctPass) {
         // Show error message
-        document.getElementById("error").innerHTML = "Incorrect! Try again.";
+        document.getElementById("error").innerHTML = "Incorrect username! Try again.";
+    } else if (userField === correctUser && passField != correctPass) {
+        // Show error message
+        document.getElementById("error").innerHTML = "Incorrect password! Try again.";
+    } else if (userField != correctUser && passField != correctPass) {
+        // Show error message
+        document.getElementById("error").innerHTML = "Incorrect username and password! Try again.";
     }
 }
