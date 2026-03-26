@@ -704,12 +704,12 @@ function checkPractice9() {
 
 function login() {
     // 1. Get the values the user typed
-    var userField = document.getElementById("user").value;
+    var userField = document.getElementById("username").value;
     var passField = document.getElementById("password").value;
 
     // 2. The Universal Username and Password that everyone needs to type
     var correctUser = "Admin";
-    var correctPass = "AlgebraIsFun!";
+    var correctPass = "Algebraisfun!";
 
     // 3. The Check - If the username and password match, show the website. Else, show an error message.
     if (userField === correctUser && passField === correctPass) {
