@@ -701,3 +701,24 @@ function checkPractice9() {
         alert("Not quite.\nHint: You found b=7 (Width), now just add 3 to get the original Length!\nAlso, did you forget the units (metres)?");
     }
 }
+
+function login() {
+    // 1. Get the values the user typed
+    var userField = document.getElementById("user").value;
+    var passField = document.getElementById("password").value;
+
+    // 2. The Universal Username and Password that everyone needs to type
+    var correctUser = "Admin";
+    var correctPass = "AlgebraIsFun!";
+
+    // 3. The Check - If the username and password match, show the website. Else, show an error message.
+    if (userField === correctUser && passField === correctPass) {
+        // Hide the login screen
+        document.getElementById("login-screen").style.display = "none";
+        // Show the actual website
+        document.getElementById("main-content").style.display = "block";
+    } else {
+        // Show error message
+        document.getElementById("error").innerHTML = "Incorrect! Try again.";
+    }
+}
