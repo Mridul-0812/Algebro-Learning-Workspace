@@ -579,3 +579,10 @@ input[type="text"] {
     border-radius: 4px;
     cursor: pointer;
 }
+
+/* This line of code preventa scrolling of page when those specific elements are pressed */
+.block, .seesaw-item, [draggable="true"] {
+    touch-action: none; 
+    user-select: none;
+    -webkit-user-drag: element;
+}
