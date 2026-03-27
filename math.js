@@ -728,3 +728,11 @@ function login() {
         document.getElementById("error").innerHTML = "Incorrect username and password! Try again.";
     }
 }
+
+// Touch-to-click function for mobile devices - this allows users to tap on elements that have 'onclick' events (like buttons) and have it register as a click, improving mobile usability.
+document.addEventListener("touchstart", function(e) {
+    // Finds the element somebody touched and forces a 'click' event
+    if (e.target.onclick || e.target.tagName === 'BUTTON') {
+        e.target.click();
+    }
+}, {passive: true});
