@@ -580,7 +580,7 @@ input[type="text"] {
     cursor: pointer;
 }
 
-/* This line of code preventa scrolling of page when those specific elements are pressed */
+/* This line of code prevents scrolling of page when those specific elements are pressed */
 .block, .seesaw-item, [draggable="true"] {
     touch-action: none; 
     user-select: none;
