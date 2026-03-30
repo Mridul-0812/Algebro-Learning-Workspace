@@ -8,16 +8,16 @@
 
     <div id="login-screen">
         <div class="login-container">
-            <h1>Algebro Login</h1>
-            <p>Please enter credentials to start</p>
-            <p style="font-size: 14px; color: #555; text-align: left;">
-                <strong>Hint:</strong> You are the <u>Admin</u><br>
-                <strong>Password:</strong> Algebrais... (3 letters + !)
-            </p>
-            <input type="text" id="username" placeholder="Username - type Admin">
-            <input type="password" id="password" placeholder="Password - type Algebraisfun!">
-            <button onclick="login()">Login</button>
-            <p id="error" style="color: red; font-size: 12px;"></p>
+            <h1 id="form-title">Algebro Login</h1>
+            
+            <div id="auth-fields">
+                <input type="email" id="user-email" placeholder="Email Address">
+                <input type="password" id="user-pass" placeholder="Password">
+                <button id="main-auth-btn" onclick="handleAuth()">Login</button>
+            </div>
+    
+            <p id="toggle-text">Don't have an account? <a href="#" onclick="toggleAuth()">Sign Up</a></p>
+            <p id="error" style="color: #ff4444; font-size: 12px;"></p>
         </div>
     </div>
 

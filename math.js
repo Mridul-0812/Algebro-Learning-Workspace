@@ -702,30 +702,41 @@ function checkPractice9() {
     }
 }
 
-function login() {
-    // 1. Get the values the user typed
-    var userField = document.getElementById("username").value;
-    var passField = document.getElementById("password").value;
+let isSignUpMode = false;
 
-    // 2. The Universal Username and Password that everyone needs to type
-    var correctUser = "Admin";
-    var correctPass = "Algebraisfun!";
+function toggleAuth() {
+    isSignUpMode = !isSignUpMode;
+    document.getElementById("form-title").innerText = isSignUpMode ? "Create Account" : "Algebro Login";
+    document.getElementById("main-auth-btn").innerText = isSignUpMode ? "Sign Up" : "Login";
+    document.getElementById("toggle-text").innerHTML = isSignUpMode ? 
+        'Already have an account? <a href="#" onclick="toggleAuth()">Login</a>' : 
+        'Don\'t have an account? <a href="#" onclick="toggleAuth()">Sign Up</a>';
+}
 
-    // 3. The Check - If the username and password match, show the website. Else, show an error message.
-    if (userField === correctUser && passField === correctPass) {
-        // Hide the login screen
-        document.getElementById("login-screen").style.display = "none";
-        // Show the actual website
-        document.getElementById("main-content").style.display = "block";
-    } else if (userField != correctUser && passField === correctPass) {
-        // Show error message
-        document.getElementById("error").innerHTML = "Incorrect username! Try again.";
-    } else if (userField === correctUser && passField != correctPass) {
-        // Show error message
-        document.getElementById("error").innerHTML = "Incorrect password! Try again.";
-    } else if (userField != correctUser && passField != correctPass) {
-        // Show error message
-        document.getElementById("error").innerHTML = "Incorrect username and password! Try again.";
+function handleAuth() {
+    const email = document.getElementById("user-email").value;
+    const pass = document.getElementById("user-pass").value;
+    const errorEl = document.getElementById("error");
+
+    if (!email || !pass) {
+        errorEl.innerText = "Please fill in all fields.";
+        return;
+    }
+
+    if (isSignUpMode) {
+        // SIGN UP: Save to browser memory
+        localStorage.setItem(email, pass);
+        alert("Account created for " + email + "! (You can now log-in successfully with that e-mail and password).");
+        toggleAuth(); // Switch back to login mode
+    } else {
+        // LOGIN: Check browser memory
+        const savedPass = localStorage.getItem(email);
+        if (savedPass === pass) {
+            document.getElementById("login-screen").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
+        } else {
+            errorEl.innerText = "Invalid email or password.";
+        }
     }
 }
 
