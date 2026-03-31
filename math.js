@@ -702,10 +702,23 @@ function checkPractice9() {
     }
 }
 
+// --- 1. CONFIGURATION ---
+const EMAILJS_PUBLIC_KEY = "mww_8eK7ey642rjGI"; 
+const EMAILJS_SERVICE_ID = "service_xnswg7v";
+const EMAILJS_TEMPLATE_ID = "template_7f5stqb";
+
+(function() {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+})();
+
 let isSignUpMode = false;
 
+// --- 2. UI TOGGLE LOGIC ---
 function toggleAuth() {
     isSignUpMode = !isSignUpMode;
+    const errorEl = document.getElementById("error");
+    errorEl.innerText = ""; 
+    
     document.getElementById("form-title").innerText = isSignUpMode ? "Create Account" : "Algebro Login";
     document.getElementById("main-auth-btn").innerText = isSignUpMode ? "Sign Up" : "Login";
     document.getElementById("toggle-text").innerHTML = isSignUpMode ? 
@@ -713,7 +726,8 @@ function toggleAuth() {
         'Don\'t have an account? <a href="#" onclick="toggleAuth()">Sign Up</a>';
 }
 
-function handleAuth() {
+// --- 3. CORE AUTHENTICATION LOGIC ---
+async function handleAuth() {
     const email = document.getElementById("user-email").value;
     const pass = document.getElementById("user-pass").value;
     const errorEl = document.getElementById("error");
@@ -724,16 +738,70 @@ function handleAuth() {
     }
 
     if (isSignUpMode) {
-        // SIGN UP: Save to browser memory
-        localStorage.setItem(email, pass);
-        alert("Account created for " + email + "! (You can now log-in successfully with that e-mail and password).");
-        toggleAuth(); // Switch back to login mode
+        // --- STAGE 1: SIGN UP & VERIFICATION ---
+        const verificationCode = Math.floor(1000 + Math.random() * 9000);
+        const templateParams = {
+            email: email,
+            verification_code: verificationCode
+        };
+
+        errorEl.style.color = "blue";
+        errorEl.innerText = "Sending secure decryption key...";
+
+        try {
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+            
+            let userEntry = "";
+            let isVerified = false;
+
+            // --- THE STUBBORN LOOP FIX ---
+            // This loop refuses to exit if the prompt is cancelled by a tab-switch
+            while (!isVerified) {
+                userEntry = prompt("🛡️ SECURITY CHECK\n\n1. Switch tabs and find the code in your email.\n2. Come back here and enter it below.\n\n(Type 'EXIT' to cancel verification)");
+
+                // If userEntry is null, the browser tried to auto-close the prompt.
+                // We 'continue' the loop to force the prompt to reappear.
+                if (userEntry === null || userEntry === "") {
+                    continue; 
+                }
+
+                // Allow the user to quit intentionally by typing 'EXIT'
+                if (userEntry.toUpperCase() === "EXIT") {
+                    errorEl.style.color = "red";
+                    errorEl.innerText = "Verification cancelled by user.";
+                    return;
+                }
+
+                if (userEntry == verificationCode) {
+                    isVerified = true;
+                } else {
+                    alert("Incorrect code. Please try again.");
+                }
+            }
+
+            localStorage.setItem(email, pass);
+            alert("Account Verified! Welcome to the Algebro Team.");
+            errorEl.style.color = "red"; 
+            toggleAuth(); 
+
+        } catch (error) {
+            console.error("EmailJS error:", error);
+            errorEl.style.color = "red";
+            errorEl.innerText = "Failed to send email. Please check your connection.";
+        }
+
     } else {
-        // LOGIN: Check browser memory
+        // --- STAGE 2: LOGIN ---
         const savedPass = localStorage.getItem(email);
+        
         if (savedPass === pass) {
             document.getElementById("login-screen").style.display = "none";
             document.getElementById("main-content").style.display = "block";
+            
+            const glassCard = document.querySelector(".glass-card");
+            if (glassCard) {
+                glassCard.style.display = "block";
+            }
         } else {
             errorEl.innerText = "Invalid email or password.";
         }
