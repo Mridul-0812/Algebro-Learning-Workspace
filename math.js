@@ -703,35 +703,50 @@ function checkPractice9() {
 }
 
 // --- 1. CONFIGURATION ---
+// These credentials link the app to the EmailJS service for the verification system
 const EMAILJS_PUBLIC_KEY = "mww_8eK7ey642rjGI"; 
 const EMAILJS_SERVICE_ID = "service_xnswg7v";
 const EMAILJS_TEMPLATE_ID = "template_7f5stqb";
 
+// Initialise the EmailJS SDK so the browser can communicate with the mail server
 (function() {
     emailjs.init(EMAILJS_PUBLIC_KEY);
 })();
 
+// Global state variable to track if the user is on the Login or Sign Up screen
 let isSignUpMode = false;
 
 // --- 2. UI TOGGLE LOGIC ---
+// This function handles the visual transition between Login and Sign Up modes
 function toggleAuth() {
     isSignUpMode = !isSignUpMode;
     const errorEl = document.getElementById("error");
-    errorEl.innerText = ""; 
+    const confirmField = document.getElementById("confirm-pass");
     
+    errorEl.innerText = ""; // Clear any previous error messages for a clean UI
+    
+    // Update the DOM elements based on the current mode
     document.getElementById("form-title").innerText = isSignUpMode ? "Create Account" : "Algebro Login";
     document.getElementById("main-auth-btn").innerText = isSignUpMode ? "Sign Up" : "Login";
+    
+    // Toggle the visibility of the "Confirm Password" field using a ternary operator
+    confirmField.style.display = isSignUpMode ? "block" : "none";
+    
+    // Update the toggle link text at the bottom of the card
     document.getElementById("toggle-text").innerHTML = isSignUpMode ? 
         'Already have an account? <a href="#" onclick="toggleAuth()">Login</a>' : 
         'Don\'t have an account? <a href="#" onclick="toggleAuth()">Sign Up</a>';
 }
 
 // --- 3. CORE AUTHENTICATION LOGIC ---
+// This asynchronous function manages the entire account creation and login process
 async function handleAuth() {
     const email = document.getElementById("user-email").value;
     const pass = document.getElementById("user-pass").value;
     const errorEl = document.getElementById("error");
+    const mainBtn = document.getElementById("main-auth-btn");
 
+    // Defensive programming: prevent execution if mandatory fields are empty
     if (!email || !pass) {
         errorEl.innerText = "Please fill in all fields.";
         return;
@@ -739,6 +754,19 @@ async function handleAuth() {
 
     if (isSignUpMode) {
         // --- STAGE 1: SIGN UP & VERIFICATION ---
+        const confirmPass = document.getElementById("confirm-pass").value;
+
+        // Validation: Ensure passwords match before wasting an API request
+        if (pass !== confirmPass) {
+            errorEl.innerText = "Passwords do not match!";
+            return;
+        }
+
+        // Logic to prevent multiple clicks and redundant emails while processing
+        mainBtn.disabled = true;
+        mainBtn.innerText = "Sending Key...";
+        
+        // Generate a random 4-digit 'Decryption Key' for the user to verify their identity
         const verificationCode = Math.floor(1000 + Math.random() * 9000);
         const templateParams = {
             email: email,
@@ -746,63 +774,76 @@ async function handleAuth() {
         };
 
         errorEl.style.color = "blue";
-        errorEl.innerText = "Sending secure decryption key...";
+        errorEl.innerText = "Transmitting secure decryption key...";
 
         try {
+            // Dispatch the email via the EmailJS API
             await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
             
             let userEntry = "";
             let isVerified = false;
 
-            // --- THE STUBBORN LOOP FIX ---
-            // This loop refuses to exit if the prompt is cancelled by a tab-switch
+            // PERSISTENT LOGIC LOOP: This ensures the verification prompt stays active 
+            // even if the student switches tabs to check their Gmail/Inbox.
             while (!isVerified) {
-                userEntry = prompt("🛡️ SECURITY CHECK\n\n1. Switch tabs and find the code in your email.\n2. Come back here and enter it below.\n\n(Type 'EXIT' to cancel verification)");
+                userEntry = prompt("🛡️ SECURITY CHECK\n\n1. Switch tabs and find the code in your email.\n2. Return here and enter it below.\n\n(Type 'EXIT' to cancel)");
 
-                // If userEntry is null, the browser tried to auto-close the prompt.
-                // We 'continue' the loop to force the prompt to reappear.
+                // Handle 'Cancel' or browser auto-closures during tab-switching
                 if (userEntry === null || userEntry === "") {
+                    // Force the loop to continue (restart the prompt)
                     continue; 
                 }
 
-                // Allow the user to quit intentionally by typing 'EXIT'
+                // Allow for an intentional manual exit
                 if (userEntry.toUpperCase() === "EXIT") {
                     errorEl.style.color = "red";
                     errorEl.innerText = "Verification cancelled by user.";
+                    mainBtn.disabled = false;
+                    mainBtn.innerText = "Sign Up";
                     return;
                 }
 
-                if (userEntry == verificationCode) {
+                // Check user input against the generated code (Bypass code '9999' for testing)
+                if (userEntry == verificationCode || userEntry == "9999") {
                     isVerified = true;
                 } else {
                     alert("Incorrect code. Please try again.");
                 }
             }
 
+            // Persistence: Store the verified credentials in the browser's local storage
             localStorage.setItem(email, pass);
             alert("Account Verified! Welcome to the Algebro Team.");
             errorEl.style.color = "red"; 
-            toggleAuth(); 
+            toggleAuth(); // Revert to Login screen so user can sign in
 
         } catch (error) {
             console.error("EmailJS error:", error);
             errorEl.style.color = "red";
-            errorEl.innerText = "Failed to send email. Please check your connection.";
+            errorEl.innerText = "Failed to send email. Check your connection.";
+        } finally {
+            // Reset the button state regardless of the outcome
+            mainBtn.disabled = false;
+            mainBtn.innerText = isSignUpMode ? "Sign Up" : "Login";
         }
 
     } else {
         // --- STAGE 2: LOGIN ---
+        // Data Retrieval: Check the local database (localStorage) for the email key
         const savedPass = localStorage.getItem(email);
         
         if (savedPass === pass) {
+            // AUTH SUCCESS: Reveal the primary Algebra Workspace
             document.getElementById("login-screen").style.display = "none";
             document.getElementById("main-content").style.display = "block";
             
+            // Ensure the main 'glass-card' container is visible for the workspace
             const glassCard = document.querySelector(".glass-card");
             if (glassCard) {
                 glassCard.style.display = "block";
             }
         } else {
+            // AUTH FAILURE: Provide feedback for invalid credentials
             errorEl.innerText = "Invalid email or password.";
         }
     }
