@@ -586,3 +586,25 @@ input[type="text"] {
     user-select: none;
     -webkit-user-drag: element;
 }
+
+/* The footer for Math Legends and website name at bottom of page */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto;
+    
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8); /* Slightly faded white for a modern look */
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+footer b {
+    color: #ff9f43; /* Changes the colour of the math legends text to orangish */
+}
